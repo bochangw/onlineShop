@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div align="center">
+    <h1>Delete Product Info</h1>
+    <form action="#" th:action="@{/showProducts}" th:object="${product}" method="post">
+        <p>ID: <input type="text" th:field="*{id}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+    <a href="/showProducts">Home</a>
+</div>
+</body>
+</html>

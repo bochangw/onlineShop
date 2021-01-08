@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Orders</title>
+</head>
+<body>
+<div align="center">
+    <h1>Order History</h1>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${listOrders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.cart.totalPrice}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="/cart">
+        <input type="submit" value="Back to my cart" />
+    </form>
+</div>
+</body>
+</html>

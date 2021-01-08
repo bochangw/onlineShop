@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<div align="center">
+    <h1 th:text="'Hi ' + ${firstName}">Hi </h1>
+    <form action="#" th:action="@{'/{url}'(url=${productUrl})}" th:method="get">
+        <input type="submit" th:value="${productButtonValue}" />
+    </form>
+    <form action="/orders">
+        <input type="submit" value="Show Order History" />
+    </form>
+    <form action="/logout">
+        <input type="submit" value="Log me out" />
+    </form>
+    <h2>Products to sell</h2>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Unit</th>
+            <th>Option</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${listProducts}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.productCategory}"></td>
+            <td th:text="${product.productManufacturer}"></td>
+            <td th:text="${product.productDescription}"></td>
+            <td th:text="${product.productPrice}"></td>
+            <td th:text="${product.unitStock}"></td>
+            <td >
+                <form action="#" th:action="@{'/addToCart?id={id}'(id=${product.id})}" th:method="post">
+                    <input type="submit" value="Add to cart" />
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Your cart</h2>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Option</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cartItem : ${cartItems}">
+            <td th:text="${cartItem.product.id}"></td>
+            <td th:text="${cartItem.product.productName}"></td>
+            <td th:text="${cartItem.quantity}"></td>
+            <td th:text="${cartItem.price}"></td>
+            <td >
+                <form action="#" th:action="@{'/removeFromCart?id={id}'(id=${cartItem.product.id})}" th:method="post">
+                    <input type="submit" value="Remove" />
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h1 th:text="${totalPrice} + '$ to check out'"></h1>
+    <form action="/checkout">
+        <input type="submit" value="Checkout" />
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Product Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Product List</h1>
+    <a href="/addNewProduct">Create New Product</a>
+    <br/><br/>
+    <a href="/deleteProduct">Delete Current Product</a>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Unit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${listProducts}">
+            <td>
+                <a th:href="${'/updateProduct?id=' + product.id}" th:text="${product.id}"></a>
+            </td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.productCategory}"></td>
+            <td th:text="${product.productManufacturer}"></td>
+            <td th:text="${product.productDescription}"></td>
+            <td th:text="${product.productPrice}"></td>
+            <td th:text="${product.unitStock}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="/cart">
+        <input type="submit" value="Back to my cart" />
+    </form>
+</div>
+</body>
+</html>
